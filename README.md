@@ -1,329 +1,349 @@
-# Live Stream Queue Automation System  
-**A complete, production-quality automation framework for queue-driven livestreams.**  
-Designed for streamers. Built for developers.  
-Showcase-ready for engineering hiring managers.
+# 🧞‍♂️ **StreamGenie**
+<p align="center">
+  <img src="docs/streamgenie-banner.png" width="100%" alt="StreamGenie — your magical backstage assistant">
+</p>
+
+### *Your magical backstage assistant for livestreams.*
+
+A production-ready automation system that grants your stream’s every wish — queue syncing, chat lookups, overlay updates, and one-button control.  
+Designed for creators. Built for developers.  
+Showcase-ready as an engineering portfolio piece.
 
 ---
 
-# ⭐ 1. The Story — From Overwhelm to Elegant Automation
+# ⭐ 1. The Story — *From Chaos to Magic*
 
-Imagine this:
+Picture this:
 
-You’re running a high-energy livestream — coaching, Q&A, reactions, workshops, game help sessions, whatever your community does together.  
-Viewers *love* it. Questions flood in. Requests pile up. Everyone is excited.
+You’re hosting a high-energy livestream — Q&A, coaching, workshop, AMA, gameplay help, live reviews, whatever your community loves.
 
-And then it happens…
+The viewers are pumped.  
+The questions flood in.  
+The queue gets longer by the second.
 
-- The Google Form is filling faster than you can check it  
-- People in chat keep asking “Where am I in the queue?”  
-- OBS overlays are out of sync  
-- You’re juggling Sheets, switching scenes, copying/pasting responses  
-- The momentum of your stream starts to slip
+And suddenly…
 
-You feel overwhelmed.  
+- Your Google Form is exploding  
+- Chat keeps asking “Where am I in line?”  
+- Overlays fall out of sync  
+- You’re bouncing between tabs  
+- Momentum slips  
+- You feel overwhelmed  
+
 Your audience feels confused.  
-Your stream — despite the great content — starts losing flow.
+Your flow evaporates in real time.
 
-### 🚀 The Turning Point  
-What if all of that friction vanished?
+### ✨ Then StreamGenie arrives.
+
+What if all that overhead disappeared?
 
 What if you could:
 
-- Press one button to advance the queue  
-- Automatically update OBS overlays  
-- Give viewers perfect, real-time answers to `!queue`, `!wait`, and `!spot`  
-- Trigger animations for first-time participants  
-- Run a professional, smooth, dynamic stream *without* wrestling spreadsheets?
+- Tap **one button** to advance the queue  
+- Have your overlays update instantly  
+- Let viewers check `!queue`, `!spot`, and `!wait` with perfect accuracy  
+- Trigger first-timer animations automatically  
+- Keep your show flowing without fighting spreadsheets  
 
-**That’s exactly what this system does.**
+**That’s StreamGenie.**
 
-This project converts a messy, high-pressure workflow into a clean, automated, reliable system — all while remaining accessible, flexible, and extensible.
+A magical backstage assistant that handles the invisible work —  
+so *you* can stay present, connected, and in flow.
 
 ---
 
-# ⭐ 2. Quick Technical Overview (For People Who Want the TL;DR)
+# ⭐ 2. Quick Technical Overview
 
-**Purpose:**  
-A modular automation platform for queue / request-driven livestreams.
+**Purpose**  
+A modular automation engine for queue-driven livestreams.
 
-**Core components:**
+**Core Components**
 
-| Layer | Technology | Purpose |
-|-------|------------|---------|
-| Backend | Google Sheets + Apps Script | Queue logic + API |
-| Chat Layer | Nightbot | Viewer interface |
-| Automation | PowerShell | Overlay updates + API calls |
-| Visual Layer | OBS + WebSocket v5 | On-screen UI |
-| Optional | Stream Deck | One-button queue advancement |
+| Layer            | Technology                  | Role                                 |
+| ---------------- | --------------------------- | ------------------------------------ |
+| **GenieCore**    | Google Sheets + Apps Script | Queue logic, API endpoints           |
+| **GenieChat**    | Nightbot                    | Viewer-facing commands               |
+| **GenieTrigger** | PowerShell                  | Overlay updates, API calls           |
+| **GenieCast**    | OBS + WebSocket v5          | On-screen visuals                    |
+| Optional         | Stream Deck                 | One-button “summon the genie” action |
 
-**Highlights:**
+**Highlights**
 
-- Live, real-time viewer lookup  
+- Real-time queue status for viewers  
 - Automatic OBS overlay syncing  
-- First-timer toast animation  
-- 100% customizable  
-- No servers, no hosting, no backend infrastructure  
-- Designed for multi-hour, high-volume streams  
+- Magical “First Timer” animations  
+- No dedicated servers or hosting required  
+- Modular & extensible (dashboard, analytics, multi-queue, etc.)  
 
-**Ideal for:**
+**Ideal For**
 
 - Q&A marathons  
-- Coaching or consulting streams  
-- Viewer-request streams  
+- Coaching and consulting streams  
+- One-on-one session queues  
+- Live workshops and classes  
+- AMA events  
+- Community learning sessions  
 - Charity streamathons  
-- Community AMA events  
-- Collaborative learning sessions
+
+For deeper detail, see the docs:
+
+- `docs/architecture.md` — Architecture overview & data flow  
+- `docs/streamer-setup-guide.md` — Streamer-focused setup guide  
+- `docs/developer-guide.md` — Developer-oriented implementation notes  
+- `docs/api-reference.md` — HTTP API reference for GenieCore  
 
 ---
 
-# ⭐ 3. For Streamers — “Explain It Like I’m 11”
+# ⭐ 3. For Streamers — *Explain It Like I’m 11*
 
-This section is intentionally written so even a young beginner can follow it.
+StreamGenie is like having a tiny magical helper behind the scenes.
 
-If you can follow LEGO instructions, you can install this system.
+If you can follow LEGO instructions, you can install this.
 
----
+## 🧞 Step 1 — Make the Google Form
 
-## 🔧 Step 1 — Make the Google Form  
 Ask for:
 
 - Name  
 - Email or phone  
 - Their question / request  
 
-Google automatically creates a Sheet — your queue backend.
+Google will create a Sheet — this is your **GenieCore** queue.
 
 ---
 
-## 💻 Step 2 — Add the Code to Google Sheets
+## 🧞 Step 2 — Add the Code to Google Sheets
 
-1. Open your linked Google Sheet  
-2. Click **Extensions → Apps Script**  
-3. Delete everything  
-4. Paste in `apps_script/Code.gs`  
-5. At the top of the file, enter your Sheet ID + tab name  
-6. Click **Deploy → New deployment → Web app**  
-7. Choose:
+1. Open the linked Google Sheet.  
+2. Go to **Extensions → Apps Script**.  
+3. Delete everything.  
+4. Open `apps_script/Code.gs` from this repo and paste it in.  
+5. At the top, set your Sheet ID + tab name.  
+6. Deploy as a **web app**.  
+7. Set:
    - **Execute as:** Me  
    - **Who has access:** Anyone  
-8. Copy the link (this is your magic URL)
+8. Copy your deployment URL — this is your **Magic URL**.
+
+This is the single URL all other pieces talk to.
 
 ---
 
-## 🎤 Step 3 — Add the Nightbot Commands  
-Open Nightbot → Add command → paste from `nightbot/commands.md`.
+## 🧞 Step 3 — Add Your Nightbot Commands (GenieChat)
 
-Replace:
+1. Open Nightbot in your browser.  
+2. Go to **Custom Commands**.  
+3. Open `nightbot/commands.md` from this repo.  
+4. For each command (e.g. `!queue`, `!wait`, `!spot`):
+   - Copy the command definition.  
+   - Replace `YOUR_WEB_APP_URL` with your Magic URL.  
 
-```
-YOUR_WEB_APP_URL
-```
+Your viewers now get:
 
-…with your magic URL.
+- `!queue` — how long is the line?  
+- `!wait` — what’s the approximate wait?  
+- `!spot 1234` — where am *I* in the queue?  
 
-Now your chat has:
-
-- `!queue`
-- `!wait`
-- `!spot 1234`
-
-Nightbot will automatically reply with real-time info.
+Instant answers. Consistent accuracy.
 
 ---
 
-## 🎨 Step 4 — Set Up OBS Overlays  
-1. Install **obs-websocket v5**  
-2. Make 3 text sources:
-   - `now_active.txt`
-   - `up_next.txt`
-   - `session_count.txt`
-3. Create a group named **First Timer Toast!**  
-4. Follow all steps in `obs/SETUP.md`
+## 🧞 Step 4 — Set Up OBS Overlays (GenieCast)
 
-You’re done — your overlays update automatically!
+1. Install **obs-websocket v5** (if you haven’t already).  
+2. In your project folder, ensure there is an `overlays/` directory.  
+3. In OBS, create three **Text** sources that read from files:
+   - `overlays/now_active.txt`  
+   - `overlays/up_next.txt`  
+   - `overlays/session_count.txt`  
+4. Create a **Group** in OBS called **GenieToast** and design whatever “first-timer” animation or frame you want there.  
+5. Follow `obs/SETUP.md` for precise names and configuration.
 
----
-
-## 🟩 Step 5 — Enable the Magic Button  
-Double-click `nextSession.bat` to advance the queue.  
-Everything updates. Toast fires. OBS syncs. Chat stays correct.
-
-If you have a Stream Deck:
-
-- Add a button
-- Choose “Open Program”
-- Set it to run `nextSession.bat`
-
-That’s it. Your stream is now **professional-grade**.
+Your overlays are now fully enchanted — they update *without you touching a thing* whenever the queue advances.
 
 ---
 
-# ⭐ 4. Installation (For Power Users)
+## 🧞 Step 5 — Summon the Genie (GenieTrigger)
+
+The automation is controlled by a PowerShell script that talks to GenieCore and updates your overlays.
+
+- Basic usage: double-click:
+
+  ```bat
+  nextSession.bat
+  ```
+
+  This will:
+  - Advance the queue  
+  - Update all overlay text files  
+  - Trigger the “First Timer” toast (if the new person is a first-timer)  
+
+- Optional: map `nextSession.bat` to a **Stream Deck** button for true one-tap magic.
+
+Once this is wired up, finishing a session is as simple as pressing a single button.
+
+---
+
+# ⭐ 4. Quickstart — Developers
+
+Clone the repo locally:
 
 ```bash
-git clone https://github.com/your-user/live-stream-queue-automation-system.git
-cd live-stream-queue-automation-system
+git clone https://github.com/moses-shenassa/interactive-streaming-queue-automation.git
+cd interactive-streaming-queue-automation
 ```
 
-Inspect folders:
+Explore the structure:
 
 ```text
-apps_script/
-powershell/
-obs/
-nightbot/
-overlays/
-nextSession.bat
+apps_script/          # GenieCore: Apps Script backend
+nightbot/             # GenieChat: Nightbot command templates
+obs/                  # GenieCast: OBS setup notes
+overlays/             # Text files OBS reads from
+powershell/           # GenieTrigger: automation scripts
+docs/                 # Architecture, API, streamer & dev guides
+nextSession.bat       # One-click queue advance helper
 ```
 
-Nothing to install.  
-Works anywhere that supports PowerShell + OBS WebSocket.
+No extra package installation is required to understand the system.  
+To actually run it, you’ll need:
+
+- A Google account (for Forms + Sheets + Apps Script)  
+- OBS with obs-websocket v5  
+- Nightbot connected to your streaming platform  
+- PowerShell (built into Windows)  
+
+See `docs/developer-guide.md` for a more thorough developer-oriented walkthrough.
 
 ---
 
-# ⭐ 5. Integration & Usage (Step-by-Step)
+# ⭐ 5. Integration & Runtime Flow
 
-## Chat  
-Nightbot fetches from:
+## 🧞 Chat (GenieChat)
 
+Nightbot hits the StreamGenie API via `$(urlfetch ...)`:
+
+```text
+?queue=1
+?spot=$(query)
+?wait=1
 ```
-YOUR_WEB_APP_URL?queue=1
-YOUR_WEB_APP_URL?spot=$(query)
-YOUR_WEB_APP_URL?wait=1
-```
 
-## OBS  
-OBS text sources read from the `.txt` files PowerShell updates.
+Each of these is wired in `nightbot/commands.md` and is safe to paste directly into Nightbot with only one edit: your Magic URL.
 
-## Queue Advancement  
+---
 
-### Basic usage:
-```
+## 🧞 OBS (GenieCast)
+
+OBS reads from the text files generated by `powershell/update_overlays.ps1`:
+
+- `overlays/now_active.txt`  
+- `overlays/up_next.txt`  
+- `overlays/session_count.txt`  
+
+When the script runs, these files update; OBS reflects the changes instantly on stream.
+
+---
+
+## 🧞 Queue Advancement (GenieTrigger)
+
+Basic:
+
+```bat
 nextSession.bat
 ```
 
-### Advanced usage:
-```
-powershell update_overlays.ps1 -Advance
+Advanced (calling the script directly):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\powershell\update_overlays.ps1 -Advance
 ```
 
-Your stream remains fully synced without any manual work.
+This keeps your stream’s **flow rhythm** intact: one action, full system update.
 
 ---
 
 # ⭐ 6. For Developers — Deep Technical Tour
 
-This section explains the engineering design for builders, integrators, and hiring managers evaluating architectural thinking.
+StreamGenie is designed as a **serverless orchestration engine** with predictable flows and idempotent state transitions.
 
----
+It uses:
 
-## 🧱 Architecture (ASCII Diagram)
+- **Google Apps Script** (`apps_script/Code.gs`) as a lightweight HTTP API over Sheets  
+- **Google Sheets** as the canonical state store for the queue  
+- **Nightbot** as the chat integration layer  
+- **PowerShell** as the automation and integration glue  
+- **OBS WebSocket v5** as the bridge into on-stream visuals  
 
-```
-                       Viewers
-                (Twitch / YouTube / FB)
-                           |
-                 !queue / !spot / !wait
-                           |
-                           v
-                      Nightbot
-               (urlfetch → GET endpoints)
-                           |
-                           v
-                 Google Apps Script API
-              ┌───────────────────────────────┐
-              │ Reads queue from Sheets       │
-              │ Computes ETAs / positions     │
-              │ Exposes endpoints:            │
-              │   ?queue=1                    │
-              │   ?spot=1234                  │
-              │   ?next=1                     │
-              └───────────────┬──────────────┘
+## 🧱 Architecture Diagram
+
+```text
+                          Viewers
+                 (Twitch / YouTube / other)
                               |
-           ┌──────────────────┴────────────────────┐
-           |                                       |
-           v                                       v
- Nightbot prints                        PowerShell Script
-   response to chat                   update_overlays.ps1
+                        !queue / !spot
+                              |
+                              v
+                          Nightbot
+                 (urlfetch → GenieCore API)
+                              |
+                              v
+                     Google Apps Script
+              ┌──────────────────────────────┐
+              │ Reads & computes queue state │
+              │ Endpoints:                   │
+              │   ?queue=1                   │
+              │   ?spot=x                    │
+              │   ?next=1                    │
+              └──────────────┬───────────────┘
+                             |
+          ┌──────────────────┴─────────────────┐
+          v                                     v
+  Nightbot reply                      PowerShell (GenieTrigger)
+                                   writes .txt → OBS sources
                                                 |
-                                                | writes text files
                                                 v
-                                 overlays/*.txt → OBS Text Sources
+                                     OBS via WebSocket
                                                 |
                                                 v
-                                           On‑stream UI
+                                        On-stream UI
 ```
 
----
+## 🧠 Engineering Highlights
 
-## 🛠 Tech Stack Details
+- **Idempotent operations** — calling `?next=1` is safe to retry if something hiccups.  
+- **No external hosting** — Apps Script is the “server,” Google Sheets is the database.  
+- **Human-editable data source** — the queue is visible and modifiable in a spreadsheet.  
+- **File-based IPC** — overlays use simple text files, easy to debug and override.  
+- **Strictly defined state transitions** — queue updates are funneled through a single, controlled path.  
+- **Extension-friendly architecture** — easy to add dashboards, bots, analytics, or multi-queue support.
 
-### Google Apps Script  
-- Stateless REST-style API  
-- Recomputes positions on each request  
-- Safely handles retries and malformed input  
+For a deeper dive, see:
 
-### Google Sheets  
-- Canonical data source  
-- Human-editable  
-- No external database required  
-
-### PowerShell  
-- Calls the API  
-- Writes overlay files  
-- Uses OBS WebSocket v5 for animations & group toggles  
-
-### OBS  
-- Reads from 3 text files  
-- Hosts the visual components  
-- Enables pro-grade automation via WebSocket  
-
-### Stream Deck  
-- Optional hardware trigger  
-- Fires queue advancement instantly  
-
----
-
-## 🧩 Engineering Methodology
-
-- **Idempotent operations** (`?next=1` is safe to retry)  
-- **No server hosting** needed — Apps Script acts as serverless compute  
-- **File-based IPC** for maximum compatibility  
-- **Modular design** → easy to extend or replace components  
-- **Predictable state transitions** enforced by the Apps Script API  
-
----
-
-## 🔌 Extension Pathways
-
-Developers can extend the system to:
-
-- Add dashboards (Next.js, React, Svelte)  
-- Replace Nightbot with a custom bot  
-- Add multi-queue support  
-- Add auth or rate limiting  
-- Log analytics over time  
-- Replace Google Sheets with Airtable / Firebase / SQL  
-
-This repo is purposely built as an extensible foundation.
+- `docs/architecture.md`  
+- `docs/developer-guide.md`  
+- `docs/api-reference.md`  
 
 ---
 
 # ⭐ 7. About the Author
 
-Your Name  
-Your Links  
-Email Address  
-Portfolio Website  
+This project was designed and implemented by **Moses Shenassa** as part of a broader focus on:
 
-*(Fill in your details manually.)*
+- Real-time systems for creators and communities  
+- Automation of operational overhead for live events  
+- Clear, human-centered engineering for non-technical users  
 
-This project reflects a philosophy:  
-**Build tools that keep humans in flow while machines handle the overhead.**
+**Links (fill these in as appropriate):**
+
+- Website: *[your site here]*  
+- LinkedIn: *[your LinkedIn here]*  
+- Email: *[your preferred contact]*  
+
+Feel free to reach out if you’d like help customizing StreamGenie for your own production workflows.
 
 ---
 
 # ⭐ 8. License
 
-MIT © 2025
-
+MIT © 2025 — StreamGenie • Moses Shenassa
